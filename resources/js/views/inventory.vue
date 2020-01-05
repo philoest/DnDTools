@@ -51,9 +51,9 @@
                     </vs-td>
 
                     <vs-td>
-                      <vs-button color="warning" type="gradient" icon="remove" @click="decrease(data, indextr)"></vs-button>
+                      <vs-button color="warning" type="gradient" icon="remove" @click="decrease(data[indextr])"></vs-button>
                       <vs-button class="margin-left-s" color="success" type="gradient" icon="add" @click="increase(data[indextr])"></vs-button>
-                      <vs-button class="margin-left-s" color="danger" type="gradient" icon="delete" @click="remove(data, indextr)"></vs-button>
+                      <vs-button class="margin-left-s" color="danger" type="gradient" icon="delete" @click="remove(data[indextr])"></vs-button>
                     </vs-td>
                   </vs-tr>
                 </template>
@@ -166,16 +166,13 @@ export default {
   },
   methods: {
     increase (item) {
-      item.count++;
+      this.$store.dispatch('inventory/itemIncrease', item);
     },
-    decrease (items, index, amount = 1) {
-      items[index].count -= amount;
-      if (items[index].count <= 0) {
-        this.$delete(items, index);
-      }
+    decrease (item, amount = 1) {
+      this.$store.dispatch('inventory/itemDecrease', {item: item, amount: amount});
     },
-    remove (items, index) {
-      this.decrease(items, index, items[index].count);
+    remove (item) {
+      this.decrease(item, item.count);
     },
     pullInventory () {
       this.$store.dispatch('inventory/pull', this.activeGame.id);

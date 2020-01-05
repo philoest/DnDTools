@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function  ()  {
 
   Route::prefix('item')->group(function () {
     Route::post('new', 'ItemController@createItem');
+    Route::post('update', 'ItemController@update');
+    Route::post('delete', 'ItemController@delete');
   });
   
 });

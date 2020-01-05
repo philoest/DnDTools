@@ -33,10 +33,59 @@ export default {
     newItem ({commit, state}, newItem) {
       axios.post('/item/new', newItem).then(result => {
         if (result.data.status === 'success') {
-          console.log(result.data.item)
           commit('addItem', result.data.item);
         }
       })
+    },
+    itemIncrease ({commit, state}, item) {
+      item.count++;
+      axios.post('/item/update', item).then(result =>  {
+        if (result.data.status !== 'success') {
+          item.count--;
+          console.log(result.data.message);
+        }
+      }).catch(e => {
+        item.count--;
+        console.log(e);
+      });
+    },
+    itemDecrease ({commit, state}, params) {
+      let item = params.item;
+      let amount = params.amount;
+      
+      item.count -= amount;
+      if (item.count <= 0) {
+        axios.post('/item/delete', item).then(result =>  {
+          if (result.data.status !== 'success') {
+            item.count += amount;
+            console.log(result.data.message);
+          } else {
+
+            for (let inventory of state.inventories) {
+              if (inventory.id === item.inventory_id) {
+                for (let index in inventory.items) {
+                  if (item.id === inventory.items[index].id) {
+                    inventory.items.splice(index, 1);
+                  }
+                }
+              }
+            }
+          }
+        }).catch(e => {
+          item.count += amount;
+          console.log(e);
+        });
+      } else {
+        axios.post('/item/update', item).then(result =>  {
+          if (result.data.status !== 'success') {
+            item.count += amount;
+            console.log(result.data.message);
+          }
+        }).catch(e => {
+          item.count += amount;
+          console.log(e);
+        });
+      }
     }
 
   },

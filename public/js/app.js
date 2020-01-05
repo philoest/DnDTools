@@ -2238,18 +2238,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     increase: function increase(item) {
-      item.count++;
+      this.$store.dispatch('inventory/itemIncrease', item);
     },
-    decrease: function decrease(items, index) {
-      var amount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      items[index].count -= amount;
-
-      if (items[index].count <= 0) {
-        this.$delete(items, index);
-      }
+    decrease: function decrease(item) {
+      var amount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      this.$store.dispatch('inventory/itemDecrease', {
+        item: item,
+        amount: amount
+      });
     },
-    remove: function remove(items, index) {
-      this.decrease(items, index, items[index].count);
+    remove: function remove(item) {
+      this.decrease(item, item.count);
     },
     pullInventory: function pullInventory() {
       this.$store.dispatch('inventory/pull', this.activeGame.id);
@@ -34558,8 +34557,7 @@ var render = function() {
                                                             $event
                                                           ) {
                                                             return _vm.decrease(
-                                                              data,
-                                                              indextr
+                                                              data[indextr]
                                                             )
                                                           }
                                                         }
@@ -34597,8 +34595,7 @@ var render = function() {
                                                             $event
                                                           ) {
                                                             return _vm.remove(
-                                                              data,
-                                                              indextr
+                                                              data[indextr]
                                                             )
                                                           }
                                                         }
@@ -66149,10 +66146,83 @@ __webpack_require__.r(__webpack_exports__);
           state = _ref3.state;
       axios.post('/item/new', _newItem).then(function (result) {
         if (result.data.status === 'success') {
-          console.log(result.data.item);
           commit('addItem', result.data.item);
         }
       });
+    },
+    itemIncrease: function itemIncrease(_ref4, item) {
+      var commit = _ref4.commit,
+          state = _ref4.state;
+      item.count++;
+      axios.post('/item/update', item).then(function (result) {
+        if (result.data.status !== 'success') {
+          item.count--;
+          console.log(result.data.message);
+        }
+      })["catch"](function (e) {
+        item.count--;
+        console.log(e);
+      });
+    },
+    itemDecrease: function itemDecrease(_ref5, params) {
+      var commit = _ref5.commit,
+          state = _ref5.state;
+      var item = params.item;
+      var amount = params.amount;
+      item.count -= amount;
+
+      if (item.count <= 0) {
+        axios.post('/item/delete', item).then(function (result) {
+          if (result.data.status !== 'success') {
+            item.count += amount;
+            console.log(result.data.message);
+          } else {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+              for (var _iterator = state.inventories[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var inventory = _step.value;
+
+                if (inventory.id === item.inventory_id) {
+                  for (var index in inventory.items) {
+                    if (item.id === inventory.items[index].id) {
+                      inventory.items.splice(index, 1);
+                    }
+                  }
+                }
+              }
+            } catch (err) {
+              _didIteratorError = true;
+              _iteratorError = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+                  _iterator["return"]();
+                }
+              } finally {
+                if (_didIteratorError) {
+                  throw _iteratorError;
+                }
+              }
+            }
+          }
+        })["catch"](function (e) {
+          item.count += amount;
+          console.log(e);
+        });
+      } else {
+        axios.post('/item/update', item).then(function (result) {
+          if (result.data.status !== 'success') {
+            item.count += amount;
+            console.log(result.data.message);
+          }
+        })["catch"](function (e) {
+          item.count += amount;
+          console.log(e);
+        });
+      }
     }
   },
   mutations: {
