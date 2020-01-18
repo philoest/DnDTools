@@ -1925,6 +1925,143 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/InventoryCard.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/InventoryCard.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: [inventory],
+  data: function data() {
+    return {};
+  },
+  computed: {
+    gewicht: function gewicht(items) {
+      return function (items) {
+        var sum = 0;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var item = _step.value;
+            sum += item.weight * item.count;
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        return sum;
+      };
+    }
+  },
+  methods: {
+    increase: function increase(item) {
+      this.$store.dispatch('inventory/itemIncrease', item);
+    },
+    decrease: function decrease(item) {
+      var amount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      this.$store.dispatch('inventory/itemDecrease', {
+        item: item,
+        amount: amount
+      });
+    },
+    remove: function remove(item) {
+      this.decrease(item, item.count);
+    },
+    newItem: function newItem() {
+      this.$emit("new-item", this.inventory.id);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/layouts/App.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/layouts/App.vue?vue&type=script&lang=js& ***!
@@ -2051,6 +2188,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_GameCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/GameCard.vue */ "./resources/js/components/GameCard.vue");
+/* harmony import */ var _components_InventoryCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/InventoryCard.vue */ "./resources/js/components/InventoryCard.vue");
 //
 //
 //
@@ -2107,72 +2245,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2202,54 +2275,11 @@ __webpack_require__.r(__webpack_exports__);
     inventories: function inventories() {
       return this.$store.state.inventory.inventories;
     },
-    gewicht: function gewicht(items) {
-      return function (items) {
-        var sum = 0;
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var item = _step.value;
-            sum += item.weight * item.count;
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-
-        return sum;
-      };
-    },
     activeGame: function activeGame() {
       return this.$store.state.activeGame;
     }
   },
   methods: {
-    increase: function increase(item) {
-      this.$store.dispatch('inventory/itemIncrease', item);
-    },
-    decrease: function decrease(item) {
-      var amount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      this.$store.dispatch('inventory/itemDecrease', {
-        item: item,
-        amount: amount
-      });
-    },
-    remove: function remove(item) {
-      this.decrease(item, item.count);
-    },
     pullInventory: function pullInventory() {
       this.$store.dispatch('inventory/pull', this.activeGame.id);
     },
@@ -34217,6 +34247,214 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/InventoryCard.vue?vue&type=template&id=39f41f9e&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/InventoryCard.vue?vue&type=template&id=39f41f9e& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "vs-card",
+    [
+      _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+        _c("h3", [_vm._v("\n      " + _vm._s(_vm.inventory.title) + "\n    ")])
+      ]),
+      _vm._v(" "),
+      _c("div", [_c("span", [_vm._v(_vm._s(_vm.inventory.description))])]),
+      _vm._v(" "),
+      _c("vs-divider"),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "vs-table",
+            {
+              attrs: { stripe: "", data: _vm.inventory.items },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var data = ref.data
+                    return _vm._l(data, function(tr, indextr) {
+                      return _c(
+                        "vs-tr",
+                        { key: indextr },
+                        [
+                          _c("vs-td", { attrs: { data: data[indextr].name } }, [
+                            _vm._v(
+                              "\n            " +
+                                _vm._s(data[indextr].name) +
+                                "\n          "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "vs-td",
+                            { attrs: { data: data[indextr].anzahl } },
+                            [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(data[indextr].count) +
+                                  "\n          "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "vs-td",
+                            { attrs: { data: data[indextr].gewicht } },
+                            [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(data[indextr].weight) +
+                                  " lb.\n          "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "vs-td",
+                            [
+                              _c("vs-button", {
+                                attrs: {
+                                  color: "warning",
+                                  type: "gradient",
+                                  icon: "remove"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.decrease(data[indextr])
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("vs-button", {
+                                staticClass: "margin-left-s",
+                                attrs: {
+                                  color: "success",
+                                  type: "gradient",
+                                  icon: "add"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.increase(data[indextr])
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("vs-button", {
+                                staticClass: "margin-left-s",
+                                attrs: {
+                                  color: "danger",
+                                  type: "gradient",
+                                  icon: "delete"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.remove(data[indextr])
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    })
+                  }
+                }
+              ])
+            },
+            [
+              _c("template", { slot: "header" }, [
+                _c("h3", [_vm._v("\n          Items\n        ")])
+              ]),
+              _vm._v(" "),
+              _c(
+                "template",
+                { slot: "thead" },
+                [
+                  _c("vs-th", [_vm._v("\n          Name\n        ")]),
+                  _vm._v(" "),
+                  _c("vs-th", [_vm._v("\n          Anzahl\n        ")]),
+                  _vm._v(" "),
+                  _c("vs-th", [_vm._v("\n          Gewicht\n        ")]),
+                  _vm._v(" "),
+                  _c("vs-th", [_vm._v("\n          Aktionen\n        ")])
+                ],
+                1
+              )
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { slot: "footer" }, slot: "footer" },
+        [
+          _c("vs-row", { attrs: { "vs-justify": "space-between" } }, [
+            _c("div", [
+              _c("span", [
+                _vm._v(
+                  "Gesamtgewicht: " +
+                    _vm._s(_vm.gewicht(_vm.inventory.items)) +
+                    " lb."
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c("vs-button", {
+                  attrs: { type: "gradient", color: "success", icon: "add" },
+                  on: {
+                    click: function($event) {
+                      return _vm.newItem()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("vs-button", {
+                  staticClass: "margin-left-s",
+                  attrs: {
+                    type: "gradient",
+                    color: "warning",
+                    icon: "settings"
+                  }
+                })
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/layouts/App.vue?vue&type=template&id=9087fe26&":
 /*!***************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/layouts/App.vue?vue&type=template&id=9087fe26& ***!
@@ -34438,283 +34676,10 @@ var render = function() {
                         }
                       },
                       [
-                        _c(
-                          "vs-card",
-                          [
-                            _c(
-                              "div",
-                              { attrs: { slot: "header" }, slot: "header" },
-                              [
-                                _c("h3", [
-                                  _vm._v(
-                                    "\n              " +
-                                      _vm._s(inventory.title) +
-                                      "\n            "
-                                  )
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c("span", [
-                                _vm._v(_vm._s(inventory.description))
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("vs-divider"),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              [
-                                _c(
-                                  "vs-table",
-                                  {
-                                    attrs: {
-                                      stripe: "",
-                                      data: inventory.items
-                                    },
-                                    scopedSlots: _vm._u(
-                                      [
-                                        {
-                                          key: "default",
-                                          fn: function(ref) {
-                                            var data = ref.data
-                                            return _vm._l(data, function(
-                                              tr,
-                                              indextr
-                                            ) {
-                                              return _c(
-                                                "vs-tr",
-                                                { key: indextr },
-                                                [
-                                                  _c(
-                                                    "vs-td",
-                                                    {
-                                                      attrs: {
-                                                        data: data[indextr].name
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                    " +
-                                                          _vm._s(
-                                                            data[indextr].name
-                                                          ) +
-                                                          "\n                  "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "vs-td",
-                                                    {
-                                                      attrs: {
-                                                        data:
-                                                          data[indextr].anzahl
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                    " +
-                                                          _vm._s(
-                                                            data[indextr].count
-                                                          ) +
-                                                          "\n                  "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "vs-td",
-                                                    {
-                                                      attrs: {
-                                                        data:
-                                                          data[indextr].gewicht
-                                                      }
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                    " +
-                                                          _vm._s(
-                                                            data[indextr].weight
-                                                          ) +
-                                                          " lb.\n                  "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "vs-td",
-                                                    [
-                                                      _c("vs-button", {
-                                                        attrs: {
-                                                          color: "warning",
-                                                          type: "gradient",
-                                                          icon: "remove"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.decrease(
-                                                              data[indextr]
-                                                            )
-                                                          }
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("vs-button", {
-                                                        staticClass:
-                                                          "margin-left-s",
-                                                        attrs: {
-                                                          color: "success",
-                                                          type: "gradient",
-                                                          icon: "add"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.increase(
-                                                              data[indextr]
-                                                            )
-                                                          }
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c("vs-button", {
-                                                        staticClass:
-                                                          "margin-left-s",
-                                                        attrs: {
-                                                          color: "danger",
-                                                          type: "gradient",
-                                                          icon: "delete"
-                                                        },
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            return _vm.remove(
-                                                              data[indextr]
-                                                            )
-                                                          }
-                                                        }
-                                                      })
-                                                    ],
-                                                    1
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            })
-                                          }
-                                        }
-                                      ],
-                                      null,
-                                      true
-                                    )
-                                  },
-                                  [
-                                    _c("template", { slot: "header" }, [
-                                      _c("h3", [
-                                        _vm._v(
-                                          "\n                  Items\n                "
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "template",
-                                      { slot: "thead" },
-                                      [
-                                        _c("vs-th", [
-                                          _vm._v(
-                                            "\n                  Name\n                "
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("vs-th", [
-                                          _vm._v(
-                                            "\n                  Anzahl\n                "
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("vs-th", [
-                                          _vm._v(
-                                            "\n                  Gewicht\n                "
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("vs-th", [
-                                          _vm._v(
-                                            "\n                  Aktionen\n                "
-                                          )
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  2
-                                )
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { attrs: { slot: "footer" }, slot: "footer" },
-                              [
-                                _c(
-                                  "vs-row",
-                                  { attrs: { "vs-justify": "space-between" } },
-                                  [
-                                    _c("div", [
-                                      _c("span", [
-                                        _vm._v(
-                                          "Gesamtgewicht: " +
-                                            _vm._s(
-                                              _vm.gewicht(inventory.items)
-                                            ) +
-                                            " lb."
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      [
-                                        _c("vs-button", {
-                                          attrs: {
-                                            type: "gradient",
-                                            color: "success",
-                                            icon: "add"
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.newItem(inventory.id)
-                                            }
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("vs-button", {
-                                          staticClass: "margin-left-s",
-                                          attrs: {
-                                            type: "gradient",
-                                            color: "warning",
-                                            icon: "settings"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
+                        _c("inventory-card", {
+                          attrs: { inventory: inventory },
+                          on: { "new-item": _vm.newItem }
+                        })
                       ],
                       1
                     )
@@ -65877,6 +65842,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/InventoryCard.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/InventoryCard.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _InventoryCard_vue_vue_type_template_id_39f41f9e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InventoryCard.vue?vue&type=template&id=39f41f9e& */ "./resources/js/components/InventoryCard.vue?vue&type=template&id=39f41f9e&");
+/* harmony import */ var _InventoryCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InventoryCard.vue?vue&type=script&lang=js& */ "./resources/js/components/InventoryCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _InventoryCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _InventoryCard_vue_vue_type_template_id_39f41f9e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _InventoryCard_vue_vue_type_template_id_39f41f9e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/InventoryCard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/InventoryCard.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/InventoryCard.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InventoryCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./InventoryCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/InventoryCard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InventoryCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/InventoryCard.vue?vue&type=template&id=39f41f9e&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/InventoryCard.vue?vue&type=template&id=39f41f9e& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InventoryCard_vue_vue_type_template_id_39f41f9e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./InventoryCard.vue?vue&type=template&id=39f41f9e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/InventoryCard.vue?vue&type=template&id=39f41f9e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InventoryCard_vue_vue_type_template_id_39f41f9e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InventoryCard_vue_vue_type_template_id_39f41f9e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/layouts/App.vue":
 /*!**************************************!*\
   !*** ./resources/js/layouts/App.vue ***!
@@ -66228,12 +66262,16 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     addItem: function addItem(state, newItem) {
       var found = false;
-      state.inventories.forEach(function (inventory) {
-        if (inventory.id === newItem.inventory_id) {
-          inventory.items.push(newItem);
+      var index = 0;
+
+      while (!found && index < state.inventories.length) {
+        if (state.inventories[index].id === newItem.inventory_id) {
+          state.inventories[index].items.push(newItem);
           found = true;
         }
-      });
+
+        index++;
+      }
 
       if (!found) {
         console.log('Item couldn\'t be added...');
@@ -66483,9 +66521,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/dndtools/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /var/www/dndtools/resources/less/app.less */"./resources/less/app.less");
-module.exports = __webpack_require__(/*! /var/www/dndtools/resources/less/welcome.less */"./resources/less/welcome.less");
+__webpack_require__(/*! /var/www/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/resources/less/app.less */"./resources/less/app.less");
+module.exports = __webpack_require__(/*! /var/www/resources/less/welcome.less */"./resources/less/welcome.less");
 
 
 /***/ })
