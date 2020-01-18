@@ -92,12 +92,17 @@ export default {
   mutations: {
     addItem (state, newItem) {
       let found = false;
-      state.inventories.forEach(inventory =>  {
-        if (inventory.id === newItem.inventory_id) {
-          inventory.items.push(newItem);
+      let index = 0;
+      while (!found && index < state.inventories.length) {
+
+        if (state.inventories[index].id === newItem.inventory_id) {
+          state.inventories[index].items.push(newItem);
           found = true;
         }
-      });
+
+        index++;
+      }
+      
       if (!found) {
         console.log('Item couldn\'t be added...');
       }
