@@ -30,27 +30,8 @@
             Aktionen
           </vs-th>
         </template>
-
         <template slot-scope="{data}">
-          <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-            <vs-td :data="data[indextr].name">
-              {{data[indextr].name}}
-            </vs-td>
-
-            <vs-td :data="data[indextr].anzahl">
-              {{data[indextr].count}}
-            </vs-td>
-
-            <vs-td :data="data[indextr].gewicht">
-              {{data[indextr].weight}} lb.
-            </vs-td>
-
-            <vs-td>
-              <vs-button color="warning" type="gradient" icon="remove" @click="decrease(data[indextr])"></vs-button>
-              <vs-button class="margin-left-s" color="success" type="gradient" icon="add" @click="increase(data[indextr])"></vs-button>
-              <vs-button class="margin-left-s" color="danger" type="gradient" icon="delete" @click="remove(data[indextr])"></vs-button>
-            </vs-td>
-          </vs-tr>
+          <item-row :key="indextr" v-for="(tr, indextr) in data" :item="tr" />
         </template>
       </vs-table>
     </div>
@@ -68,6 +49,8 @@
   </vs-card>
 </template>
 <script>
+import itemRow from "../components/ItemRow.vue"
+
 export default {
   props: [inventory],
   data () {
@@ -88,19 +71,12 @@ export default {
     },
   },
   methods: {
-    increase (item) {
-      this.$store.dispatch('inventory/itemIncrease', item);
-    },
-    decrease (item, amount = 1) {
-      this.$store.dispatch('inventory/itemDecrease', {item: item, amount: amount});
-    },
-    remove (item) {
-      this.decrease(item, item.count);
-    },
     newItem () {
       this.$emit("new-item", this.inventory.id);
     }
+  },
+  components: {
+    itemRow
   }
-
 }
 </script>

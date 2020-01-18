@@ -73,6 +73,7 @@ export default {
   },
   components: {
     gameCard,
+    inventoryCard
   },
   mounted () {
     // pull the inventories when their are none found yet
