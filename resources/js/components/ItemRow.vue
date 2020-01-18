@@ -4,11 +4,11 @@
       {{item.name}}
     </vs-td>
 
-    <vs-td :data="item.anzahl">
+    <vs-td :data="item.count">
       {{item.count}}
     </vs-td>
 
-    <vs-td :data="item.gewicht">
+    <vs-td :data="item.weight">
       {{item.weight}} lb.
     </vs-td>
 
@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-  props: [item],
+  props: ['item'],
   methods: {
     increase (item) {
       this.$store.dispatch('inventory/itemIncrease', item);

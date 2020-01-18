@@ -1987,7 +1987,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: [inventory],
+  props: ['inventory'],
   data: function data() {
     return {};
   },
@@ -2066,7 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: [item],
+  props: ['item'],
   methods: {
     increase: function increase(item) {
       this.$store.dispatch('inventory/itemIncrease', item);
@@ -34421,11 +34421,11 @@ var render = function() {
         _vm._v("\n    " + _vm._s(_vm.item.name) + "\n  ")
       ]),
       _vm._v(" "),
-      _c("vs-td", { attrs: { data: _vm.item.anzahl } }, [
+      _c("vs-td", { attrs: { data: _vm.item.count } }, [
         _vm._v("\n    " + _vm._s(_vm.item.count) + "\n  ")
       ]),
       _vm._v(" "),
-      _c("vs-td", { attrs: { data: _vm.item.gewicht } }, [
+      _c("vs-td", { attrs: { data: _vm.item.weight } }, [
         _vm._v("\n    " + _vm._s(_vm.item.weight) + " lb.\n  ")
       ]),
       _vm._v(" "),

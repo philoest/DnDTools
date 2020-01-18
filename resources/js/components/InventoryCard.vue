@@ -52,7 +52,7 @@
 import itemRow from "../components/ItemRow.vue"
 
 export default {
-  props: [inventory],
+  props: ['inventory'],
   data () {
     return {
 
