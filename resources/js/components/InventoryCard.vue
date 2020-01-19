@@ -18,6 +18,9 @@
         </template>
         <template slot="thead">
           <vs-th>
+
+          </vs-th>
+          <vs-th>
             Name
           </vs-th>
           <vs-th>
@@ -30,8 +33,18 @@
             Aktionen
           </vs-th>
         </template>
+          
         <template slot-scope="{data}">
-          <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
+          <vs-tr :key="indextr" v-for="(tr, indextr) in data" 
+                 v-bind:draggable="draggable" 
+                 v-on:dragstart.native="startDrag(indextr)"
+                 v-on:dragover.native="$event.preventDefault()"
+                 v-on:drop.native="endDrag()">
+            <vs-td>
+              <span>
+                <vs-icon class="drag-icon" icon="reorder" @mousedown="setDraggable()"></vs-icon>
+              </span>
+            </vs-td>
             <vs-td :data="tr.name">
               {{tr.name}}
             </vs-td>
@@ -72,7 +85,9 @@ export default {
   props: ['inventory'],
   data () {
     return {
-
+      draggable: false,
+      dragItem: null,
+      dragItemIndex: null
     }
   },
   computed: {
@@ -87,6 +102,8 @@ export default {
       }
     },
   },
+  events: {
+  },
   methods: {
     newItem () {
       this.$emit("new-item", this.inventory.id);
@@ -100,8 +117,26 @@ export default {
     remove (item) {
       this.decrease(item, item.count);
     },
+    setDraggable () {
+      this.draggable = true;
+    },
+    startDrag (index) {
+      this.dragItem = this.inventory.items[index];
+      this.dragItemIndex = index;
+    },
+    endDrag () {
+      this.inventory.items.push(this.dragItem);
+      this.$delete(this.inventory.items, this.dragItemIndex);
+      this.draggable = false;
+    } 
   },
   components: {
   }
 }
 </script>
+<style lang="less" scoped>
+.drag-icon {
+  cursor: pointer;
+  font-size: 18px;
+}
+</style>
